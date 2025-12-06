@@ -251,6 +251,10 @@ func run(ctx context.Context, c *cli.Command) error {
 				Handler: handler,
 			}
 
+			httpServer.Protocols = new(http.Protocols)
+			httpServer.Protocols.SetHTTP1(true)
+			httpServer.Protocols.SetUnencryptedHTTP2(true)
+
 			go func() {
 				<-ctx.Done()
 				log.Info().Msg("shutdown http server ...")
